@@ -60,4 +60,5 @@ module "vm" {
   resource_group   = "${module.resource_group.resource_group_name}"
   subnet_id        = "${module.network.subnet_id_test}"
   publicip_id      = "${module.publicip.public_ip_address_id}"
+  public_key       = "${var.public_key}"
 }
