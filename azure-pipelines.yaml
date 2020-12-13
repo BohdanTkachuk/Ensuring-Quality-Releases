@@ -18,7 +18,7 @@ stages:
 
    
     - script: |
-        cd $(Build.SourcesDirectory)\terraform
+        cd $(Build.SourcesDirectory)/terraform
         ls -all
         terraform init 
         terraform apply -auto-approve -var 'public_key=$(PublicKey.secureFilePath)'   
