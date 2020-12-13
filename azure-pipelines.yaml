@@ -18,6 +18,11 @@ stages:
 
    
     - script: |
+    cancelTimeoutInMinutes: 
+        cd ($Build.SourcesDirectory)\starter-code\terraform
+        ls
+
+        terraform apply -auto-approve -var 'public_key=$(PublicKey.secureFilePath)'   
         echo Write your commands here 
         echo Hello world
         
