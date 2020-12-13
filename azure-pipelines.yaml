@@ -16,12 +16,17 @@ stages:
         sshPublicKey: '$(MYPUBKEY)'
         sshKeySecureFile: 'id_rsa.pub'
 
+    - task: DownloadSecureFile@1
+      name: RSApublicKey
+      inputs:
+        secureFile: 'id_rsa.pub'
+
    
     - script: |
         cd $(Build.SourcesDirectory)/terraform
         ls -all
         terraform init 
-        terraform apply -auto-approve -var 'public_key=$(PublicKey.secureFilePath)'   
+        terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
         echo Write your commands here 
         echo Hello world
         
