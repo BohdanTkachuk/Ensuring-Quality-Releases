@@ -19,7 +19,7 @@ stages:
    
     - script: |
         cd $(Build.SourcesDirectory)\starter-code\terraform
-        ls
+        terraform init 
         terraform apply -auto-approve -var 'public_key=$(PublicKey.secureFilePath)'   
         echo Write your commands here 
         echo Hello world
