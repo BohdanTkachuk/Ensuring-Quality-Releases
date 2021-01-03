@@ -9,8 +9,8 @@ terraform {
   backend "azurerm" {
     storage_account_name = "tstate7541"
     container_name       = "tstate"
-    key                  = "test"
-    access_key           = "ecQYoUHOTeYlD7lZ/FPc0ekh37n08Nlak2AWRjwO+La6eIxCiieHtSLf8XR9+GlKnG2PaPs3sezM6gVs7KcboA=="
+    key                  = "key1"
+    access_key           = "lIb3fsOy6glginkGn8lLA0VILB8AIXEZaLgN0CbBk5rdbUrg6//E4BAXKvJSIyj679irxvdmqZPpOixzo5FGFA=="
   }
 }
 module "resource_group" {
