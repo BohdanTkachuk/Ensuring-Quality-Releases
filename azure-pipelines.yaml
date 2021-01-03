@@ -34,7 +34,7 @@ stages:
         command: 'custom'
         customCommand: 'install newman -g'
 
-    -    
+   
     - task: CmdLine@2
       inputs:
         script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/StarterAPIs.json -r cli,junitfull --reporter-junitfull-export JUnitReport.xml'
