@@ -29,11 +29,9 @@ stages:
     #    terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
     #  displayName: Build terraform infrastructure 
 
-    - task: Npm@1
+    - task: CmdLine@2
       inputs:
-        command: 'custom'
-        customCommand: 'install newman -g'
-
+        script: sudo npm install newman -g 
    
     - task: CmdLine@2
       inputs:
