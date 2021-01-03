@@ -31,7 +31,9 @@ stages:
 
     - task: CmdLine@2
       inputs:
-        script: sudo npm install newman -g 
+        script: |
+          sudo npm install -g newman
+          sudo npm install -g newman-reporter-junitfull
    
     - task: CmdLine@2
       inputs:
