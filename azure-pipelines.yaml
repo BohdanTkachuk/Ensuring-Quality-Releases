@@ -27,8 +27,7 @@ stages:
         ls -all
         terraform init 
         terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
-        echo Write your commands here 
-        echo Hello world
+      displayName: Build terraform infrastructure 
         
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
