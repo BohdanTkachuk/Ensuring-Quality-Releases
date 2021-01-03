@@ -52,8 +52,8 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: ''
-              appName: ''
+              azureSubscription: '5717f5b8-d0ac-41b0-a6b7-6c3a51c25847'
+              appName: 'FakeAPI'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   # - deployment: VMDeploy
