@@ -28,7 +28,21 @@ stages:
     #    terraform init 
     #    terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
     #  displayName: Build terraform infrastructure 
-        
+    
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'install newman -g'
+
+    -    
+    - task: CmdLine@2
+      inputs:
+        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/StarterAPIs.json -r cli,junitfull --reporter-junitfull-export JUnitReport.xml'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'JUnitReport.xml'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
