@@ -85,21 +85,11 @@ stages:
                 sudo chmod +x $(Build.SourcesDirectory)/automatedtesting/jmeter/run.sh
             displayName: "Tets"
 
-          - task: Bash@3
-            displayName: Execute JMeter tests
+          - task: CmdLine@2
             inputs:
-              targetType: filePath
-              filePath: '$(Build.SourcesDirectory)/automatedtesting/jmeter/test.sh'
-              arguments: '$PWD Starter.jmx udacity-app-appservice.azurewebsites.net'
-              workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
-              failOnStderr: true
-            continueOnError: True
-          
-          - task: PublishPipelineArtifact@1
-            displayName: Publish JMeter Report
-            inputs:
-              targetPath: $(Build.SourcesDirectory)/automatedtesting/jmeter/report/
-              artifact: jmeter
+              script: sh build.sh
+              workingDirectory: $(Build.SourcesDirectory)/TestFiles
+            displayName: Run Load test
 
   # - deployment: VMDeploy
   #   displayName: NAME
