@@ -91,7 +91,7 @@ stages:
               script: |
                 cd $(Build.SourcesDirectory)
                 ls -all 
-                git checkout git@github.com:BohdanTkachuk/Ensuring-Quality-Releases.git
+                git clone git@github.com:BohdanTkachuk/Ensuring-Quality-Releases.git
                 cd $(Build.SourcesDirectory)
                 ls -all 
             displayName: "Test"
