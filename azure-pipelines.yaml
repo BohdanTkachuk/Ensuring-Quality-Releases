@@ -88,7 +88,7 @@ stages:
           - task: CmdLine@2
             inputs:
               script: sh build.sh
-              workingDirectory: $(Build.SourcesDirectory)
+              workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
             displayName: Run Load test
 
   # - deployment: VMDeploy
