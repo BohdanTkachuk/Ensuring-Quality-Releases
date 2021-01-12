@@ -85,10 +85,11 @@ stages:
             name: RSApublicKey
             inputs:
               secureFile: 'id_rsa.pub'
-              
+
           - task: CmdLine@2
             inputs:
               script: |
+                cd $(Build.SourcesDirectory)
                 ls -all 
             displayName: "Test"
    
