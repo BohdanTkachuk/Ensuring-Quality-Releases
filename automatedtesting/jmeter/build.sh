@@ -11,7 +11,7 @@ gunzip apache-jmeter-${VERSION}.tgz
 # Build docker image containing jmeter.
 docker build . --tag jmeter:latest
 # Run docker container.
-docker run -d --name jmeter -it jmeter:latest
+docker run -d --name jmeter -it jmeter
 docker rm -f jmeter
 sleep $(($DURATION + 60))
 docker cp jmeter:/LoadReports .
