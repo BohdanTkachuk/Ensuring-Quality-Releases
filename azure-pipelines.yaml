@@ -78,22 +78,14 @@ stages:
           #    package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
           #    deploymentMethod: 'auto'
 
-          - task: CmdLine@2
-            inputs:
-              script: |
-                cd $(Build.SourcesDirectory)
-                ls -all 
-                git clone git@github.com:BohdanTkachuk/Ensuring-Quality-Releases.git
-                cd $(Build.SourcesDirectory)
-                ls -all 
-            displayName: "Test"
+          
    
           - task: Bash@3
             displayName: Execute JMeter tests
             inputs:
               targetType: filePath
               filePath: '$(Build.SourcesDirectory)/automatedtesting/jmeter/test.sh'
-              arguments: '$PWD Starter.jmx $(host)'
+              arguments: '$PWD Starter.jmx udacity-app-appservice.azurewebsites.net'
               workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
               failOnStderr: true
           
