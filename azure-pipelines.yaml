@@ -91,6 +91,9 @@ stages:
               script: |
                 cd $(Build.SourcesDirectory)
                 ls -all 
+                git checkout git@github.com:BohdanTkachuk/Ensuring-Quality-Releases.git
+                cd $(Build.SourcesDirectory)
+                ls -all 
             displayName: "Test"
    
           - task: Bash@3
@@ -107,6 +110,7 @@ stages:
             inputs:
               targetPath: $(Build.SourcesDirectory)/automatedtesting/jmeter/report/
               artifact: jmeter
+
   # - deployment: VMDeploy
   #   displayName: NAME
   #   environment:
