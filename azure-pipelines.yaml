@@ -87,9 +87,21 @@ stages:
 
           - task: CmdLine@2
             inputs:
-              script: sh build.sh
-              workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
-            displayName: Run Load test
+              script: |
+                cd $(Build.SourcesDirectory)/automatedtesting/jmeter/
+                VERSION='5.3'
+                URL=https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${VERSION}.tgz
+                # Download Jmeter.
+                curl $URL > apache-jmeter-${VERSION}.tgz
+                gunzip apache-jmeter-${VERSION}.tgz
+                ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l LoadReports/results.jtl 
+                ls -a 
+
+          #- task: CmdLine@2
+          #  inputs:
+          #    script: sh build.sh
+          #    workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
+          #  displayName: Run Load test
 
   # - deployment: VMDeploy
   #   displayName: NAME
