@@ -94,6 +94,7 @@ stages:
                 # Download Jmeter.
                 curl $URL > apache-jmeter-${VERSION}.tgz
                 gunzip apache-jmeter-${VERSION}.tgz
+                tar -xvf apache-jmeter-${VERSION}.tar
                 ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l LoadReports/results.jtl 
                 ls -a 
 
