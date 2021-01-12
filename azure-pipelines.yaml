@@ -47,6 +47,7 @@ stages:
         testResultsFormat: 'JUnit'
         testResultsFiles: 'JUnitReport.xml'
       continueOnError: True
+      
     #- task: ArchiveFiles@2
     # displayName: 'Archive FakeRestAPI'
     #  inputs:
