@@ -18,8 +18,7 @@ docker ps -a
 docker cp jmeter:/ .
 ls -a
 echo "Inside apache bin"
-ls /apache-jmeter-5.3/bin
+ls /apache-jmeter-5.3
 
-echo "Inside bin"
-ls /bin
+
 
