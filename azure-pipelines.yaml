@@ -76,6 +76,12 @@ stages:
           #    package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
           #    deploymentMethod: 'auto'
           
+          - task: CmdLine@2
+            inputs:
+              script: |
+                dir 
+            displayName: "Test"
+   
           - task: Bash@3
             displayName: Execute JMeter tests
             inputs:
