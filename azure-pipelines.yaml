@@ -88,7 +88,7 @@ stages:
               targetType: filePath
               filePath: '$(Build.SourcesDirectory)/automatedtesting/jmeter/test.sh'
               arguments: '$PWD Starter.jmx $(host)'
-              #workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
+              workingDirectory: automatedtesting/jmeter
               failOnStderr: true
           
           - task: PublishPipelineArtifact@1
