@@ -79,7 +79,12 @@ stages:
           #    deploymentMethod: 'auto'
 
           
-   
+          - task: CmdLine@2
+            inputs:
+              script: |
+                sudo chmod +x $(Build.SourcesDirectory)/automatedtesting/jmeter/run.sh
+            displayName: "Tets"
+
           - task: Bash@3
             displayName: Execute JMeter tests
             inputs:
