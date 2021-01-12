@@ -79,7 +79,7 @@ stages:
           - task: CmdLine@2
             inputs:
               script: |
-                dir 
+                ls -all 
             displayName: "Test"
    
           - task: Bash@3
