@@ -15,7 +15,6 @@ docker run -d --name jmeter -it jmeter:latest
 # docker rm -f jmeter
 # sleep $(($DURATION + 60))
 docker ps -a 
-docker cp jmeter:/LoadReports .
-docker ls jmeter:/LoadReports -a
-docker ls jmeter:/. -a
+docker cp jmeter:/* .
+ls -a
 
