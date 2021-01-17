@@ -79,29 +79,24 @@ stages:
           #    deploymentMethod: 'auto'
 
           
-          - task: CmdLine@2
-            inputs:
-              script: |
-                sudo chmod +x $(Build.SourcesDirectory)/automatedtesting/jmeter/run.sh
-            displayName: "Tets"
 
-          - task: CmdLine@2
-            inputs:
-              script: |
-                cd $(Build.SourcesDirectory)/automatedtesting/jmeter/
-                VERSION='5.3'
-                URL=https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${VERSION}.tgz
-                # Download Jmeter.
-                curl $URL > apache-jmeter-${VERSION}.tgz
-                gunzip apache-jmeter-${VERSION}.tgz
-                tar -xvf apache-jmeter-${VERSION}.tar
-                ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+          #- task: CmdLine@2
+          #  inputs:
+          #    script: |
+          #      cd $(Build.SourcesDirectory)/automatedtesting/jmeter/
+          #      VERSION='5.3'
+          #      URL=https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${VERSION}.tgz
+          #      # Download Jmeter.
+          #      curl $URL > apache-jmeter-${VERSION}.tgz
+          #      gunzip apache-jmeter-${VERSION}.tgz
+          #      tar -xvf apache-jmeter-${VERSION}.tar
+          #      ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report
 
-          - task: PublishPipelineArtifact@1
-            displayName: Publish JMeter Report
-            inputs:
-              targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
-              artifact: jmeter
+          #- task: PublishPipelineArtifact@1
+          #  displayName: Publish JMeter Report
+          #  inputs:
+          #    targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+          #    artifact: jmeter
 
   - deployment: VMDeploy
     displayName: NAME
@@ -124,6 +119,7 @@ stages:
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                export PATH=$PATH:some/path
+                export PATH=$PATH:/usr/bin/chromium-browser 
+                python $(Build.SourcesDirectory)/automatedtesting/selenium/login.py
 
 
