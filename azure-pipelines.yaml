@@ -96,41 +96,34 @@ stages:
                 gunzip apache-jmeter-${VERSION}.tgz
                 tar -xvf apache-jmeter-${VERSION}.tar
                 ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report
-                ls -a 
-          
-          #- task: CmdLine@2
-          #  inputs:
-          #    script: sh build.sh
-          #    workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
-          #  displayName: Run Load test
-          
+
           - task: PublishPipelineArtifact@1
             displayName: Publish JMeter Report
             inputs:
               targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
               artifact: jmeter
 
-  # - deployment: VMDeploy
-  #   displayName: NAME
-  #   environment:
-  #     name:  ENVIRONMENT NAME
-  #     resourceType: VirtualMachine
-  #     tags: TAG NAME
-  #   strategy:
-  #     runOnce:
-  #       deploy:
-  #         steps:
-  #         - task: Bash@3
-  #           inputs:
-  #             targetType: 'inline'
-  #             script: |
-  #               #! /bin/bash
-                
-  #               sudo apt-get upgrade -y
-  #               sudo apt-get install python3-pip -y
-  #               sudo apt-get install unzip -y
-  #               sudo apt-get install -y chromium-browser
-  #               pip3 install selenium
-  #               export PATH=$PATH:some/path
+  - deployment: VMDeploy
+    displayName: NAME
+    environment:
+      name:  ENVIRONMENT NAME
+      resourceType: VirtualMachine
+      tags: TAG NAME
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                #! /bin/bash
+              
+                sudo apt-get upgrade -y
+                sudo apt-get install python3-pip -y
+                sudo apt-get install unzip -y
+                sudo apt-get install -y chromium-browser
+                pip3 install selenium
+                export PATH=$PATH:some/path
 
 
