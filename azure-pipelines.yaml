@@ -95,18 +95,20 @@ stages:
                 curl $URL > apache-jmeter-${VERSION}.tgz
                 gunzip apache-jmeter-${VERSION}.tgz
                 tar -xvf apache-jmeter-${VERSION}.tar
-                ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl 
+                ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report
                 ls -a 
-          - task: PublishPipelineArtifact@1
-            displayName: Publish JMeter Report
-            inputs:
-              targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
-              artifact: jmeter
+          
           #- task: CmdLine@2
           #  inputs:
           #    script: sh build.sh
           #    workingDirectory: $(Build.SourcesDirectory)/automatedtesting/jmeter/
           #  displayName: Run Load test
+          
+          - task: PublishPipelineArtifact@1
+            displayName: Publish JMeter Report
+            inputs:
+              targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+              artifact: jmeter
 
   # - deployment: VMDeploy
   #   displayName: NAME
