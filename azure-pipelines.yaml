@@ -122,8 +122,7 @@ stages:
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
-                pip3 install selenium
-                whereis chromedriver
+                sudo pip3 install selenium
                 export PATH=$PATH:/usr/bin/chromium-browser 
                 python $(Build.SourcesDirectory)/automatedtesting/selenium/login.py
 
