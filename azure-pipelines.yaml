@@ -118,13 +118,12 @@ stages:
               script: |
                 #! /bin/bash
                 ls -a 
-                sudo apt-get upgrade -y
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
-                sudo pip install --upgrade pip
+                sudo pip3 install --upgrade pip
                 sudo apt-get install -y chromium-browser
                 sudo pip3 install selenium
                 export PATH=$PATH:/usr/bin/chromium-browser 
-                python $(Build.SourcesDirectory)/automatedtesting/selenium/login.py
+                python3 $(Build.SourcesDirectory)/automatedtesting/selenium/login.py
 
 
