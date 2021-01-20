@@ -1,6 +1,6 @@
 # #!/usr/bin/env python
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Opoptionstions as ChromeOptions
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 
 # Start the browser and login with standard_user
