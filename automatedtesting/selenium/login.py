@@ -1,7 +1,15 @@
 # #!/usr/bin/env python
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from pyvirtualdisplay import Display
 
+options = ChromeOptions()
+    #options.add_argument("--no-sandbox")
+options.add_argument("--headless") 
+driver = webdriver.Chrome(options=options)
+display = Display(visible=0, size=(800, 800))  
+display.start()
+driver = webdriver.Chrome()
 
 # Start the browser and login with standard_user
 def login (user, password):
