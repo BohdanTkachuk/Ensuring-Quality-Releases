@@ -97,6 +97,7 @@ stages:
                 curl $URL > apache-jmeter-${VERSION}.tgz
                 gunzip apache-jmeter-${VERSION}.tgz
                 tar -xvf apache-jmeter-${VERSION}.tar
+                mkdir -p $(Build.SourcesDirectory)/automatedtesting/jmeter/report
                 ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results-starter.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report/starter
                 echo endurance test
                 ./apache-jmeter-${VERSION}/bin/jmeter -n -t EnduranceTest.jmx -l report/endurance-test-result.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report/endurance
