@@ -107,7 +107,7 @@ stages:
 
 
   - deployment: VMDeploy
-    displayName: NAME
+    displayName: Deployment VM
     environment:
       name:  Test
       resourceType: VirtualMachine
