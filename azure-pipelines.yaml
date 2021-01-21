@@ -39,14 +39,12 @@ stages:
     - task: CmdLine@2
       inputs:
         script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/data_validation_test.postman_collection.json -e "$(Build.SourcesDirectory)/automatedtesting/postman/userva.postman_environment.json" -r cli,junitfull --reporter-junitfull-export JUnitReportDataVal.xml'
-     
-      displayName: "Run Postman test"
+      displayName: "Run Postman validation test"
       continueOnError: True
     - task: CmdLine@2
       inputs:
-        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/regression_test.postman_collection.json -e "$(Build.SourcesDirectory)/automatedtesting/postman/userva.postman_environment.json" -r cli,junitfull --reporter-junitfull-export JUnitReportRegr.xml'
-     
-      displayName: "Run Postman test"
+        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/regression_test.postman_collection.json -e "$(Build.SourcesDirectory)/automatedtesting/postman/userva.postman_environment.json" -r cli,junitfull --reporter-junitfull-export JUnitReportRegr.xml'   
+      displayName: "Run Postman regression test"
       continueOnError: True    
 
     - task: PublishTestResults@2
