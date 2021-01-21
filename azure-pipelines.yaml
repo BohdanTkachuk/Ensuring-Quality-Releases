@@ -38,14 +38,21 @@ stages:
    
     - task: CmdLine@2
       inputs:
-        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/StarterAPIs.json -r cli,junitfull --reporter-junitfull-export JUnitReport.xml'
+        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/data_validation_test.postman_collection.json -e "$(Build.SourcesDirectory)/automatedtesting/postman/userva.postman_environment.json" -r cli,junitfull --reporter-junitfull-export JUnitReportDataVal.xml'
+     
       displayName: "Run Postman test"
       continueOnError: True
+    - task: CmdLine@2
+      inputs:
+        script: 'newman run $(Build.SourcesDirectory)/automatedtesting/postman/regression_test.postman_collection.json -e "$(Build.SourcesDirectory)/automatedtesting/postman/userva.postman_environment.json" -r cli,junitfull --reporter-junitfull-export JUnitReportRegr.xml'
+     
+      displayName: "Run Postman test"
+      continueOnError: True    
 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: 'JUnitReport.xml'
+        testResultsFiles: 'JUnitReport*.xml'
       continueOnError: True
       
     #- task: ArchiveFiles@2
@@ -80,30 +87,35 @@ stages:
 
           
 
-          #- task: CmdLine@2
-          #  inputs:
-          #    script: |
-          #      cd $(Build.SourcesDirectory)/automatedtesting/jmeter/
-          #      VERSION='5.3'
-          #      URL=https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${VERSION}.tgz
-          #      # Download Jmeter.
-          #      curl $URL > apache-jmeter-${VERSION}.tgz
-          #      gunzip apache-jmeter-${VERSION}.tgz
-          #      tar -xvf apache-jmeter-${VERSION}.tar
-          #      ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+           - task: CmdLine@2
+             inputs:
+              script: |
+                cd $(Build.SourcesDirectory)/automatedtesting/jmeter/
+                VERSION='5.3'
+                URL=https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${VERSION}.tgz
+                # Download Jmeter.
+                curl $URL > apache-jmeter-${VERSION}.tgz
+                gunzip apache-jmeter-${VERSION}.tgz
+                tar -xvf apache-jmeter-${VERSION}.tar
+                mkdir -p $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+                ./apache-jmeter-${VERSION}/bin/jmeter -n -t Starter.jmx -l report/results-starter.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report/starter
+                echo endurance test
+                ./apache-jmeter-${VERSION}/bin/jmeter -n -t EnduranceTest.jmx -l report/endurance-test-result.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report/endurance
+                echo stress test
+                ./apache-jmeter-${VERSION}/bin/jmeter -n -t StressTest.jmx -l report/stress-test-result.jtl -e -o $(Build.SourcesDirectory)/automatedtesting/jmeter/report/stress
 
-          #- task: PublishPipelineArtifact@1
-          #  displayName: Publish JMeter Report
-          #  inputs:
-          #    targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
-          #    artifact: jmeter
+           - task: PublishPipelineArtifact@1
+             displayName: Publish JMeter Report
+             inputs:
+              targetPath:  $(Build.SourcesDirectory)/automatedtesting/jmeter/report
+              artifact: jmeter
           
          
           
 
 
   - deployment: VMDeploy
-    displayName: NAME
+    displayName: Deployment VM
     environment:
       name:  Test
       resourceType: VirtualMachine
