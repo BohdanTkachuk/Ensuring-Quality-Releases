@@ -22,12 +22,12 @@ stages:
         secureFile: 'id_rsa.pub'
 
    
-    - script: |
-        cd $(Build.SourcesDirectory)/terraform
-        ls -all
-        terraform init 
-        terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
-      displayName: Build terraform infrastructure 
+    #- script: |
+    #    cd $(Build.SourcesDirectory)/terraform
+    #    ls -all
+    #    terraform init 
+    #    terraform apply -auto-approve -var 'public_key=$(RSApublicKey.secureFilePath)'   
+    #  displayName: Build terraform infrastructure 
       
 
     - task: CmdLine@2
@@ -54,16 +54,16 @@ stages:
         testResultsFiles: 'JUnitReport*.xml'
       continueOnError: True
       
-    #- task: ArchiveFiles@2
-    # displayName: 'Archive FakeRestAPI'
-    #  inputs:
-    #    rootFolderOrFile: '$(Build.SourcesDirectory)/automatedtesting/jmeter/fakerestapi'
-    #    includeRootFolder: false
-    #    archiveType: 'zip'
-    #    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
-    #- publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
-    #  displayName: 'Upload Package'
-    #  artifact: drop-fakerestapi
+    - task: ArchiveFiles@2
+      displayName: 'Archive FakeRestAPI'
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)/automatedtesting/jmeter/fakerestapi'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+      displayName: 'Upload Package'
+      artifact: drop-fakerestapi
 - stage: deployFakeRestAPI
   jobs:
   - deployment: FakeRestAPI
@@ -112,7 +112,7 @@ stages:
          
           
 
-- stage:
+- stage: VMDeploy
   jobs:
   - deployment: VMDeploy
     displayName: Deployment VM
