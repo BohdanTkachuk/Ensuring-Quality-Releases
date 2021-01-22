@@ -75,14 +75,14 @@ stages:
         deploy:
           steps:
            - checkout: self
-          #- task: AzureWebApp@1
-          #  displayName: 'Deploy Azure Web App'
-          #  inputs:
-          #    azureSubscription: 'BohdanSubscriptions(5717f5b8-d0ac-41b0-a6b7-6c3a51c25847)'
-          #    appType: 'webApp'
-          #    appName: 'udacity-app-AppService'
-          #    package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
-          #    deploymentMethod: 'auto'
+           - task: AzureWebApp@1
+             displayName: 'Deploy Azure Web App'
+             inputs:
+               azureSubscription: 'BohdanSubscriptions(5717f5b8-d0ac-41b0-a6b7-6c3a51c25847)'
+               appType: 'webApp'
+               appName: 'udacity-app-AppService'
+               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
+               deploymentMethod: 'auto'
 
           
 
@@ -112,7 +112,8 @@ stages:
          
           
 
-
+- stage:
+  jobs:
   - deployment: VMDeploy
     displayName: Deployment VM
     environment:
